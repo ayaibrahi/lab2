@@ -1,0 +1,77 @@
+<p>products works!</p>
+
+<!-- <div class="container">
+    <img src="assets/image2.webp">
+</div> -->
+
+
+<div class="row">
+    <!-- <input type="text" class="form-control mt-4" [value]="name" > -->
+    Search Name: <input class="form-control" [(ngModel)]="listFilteredValue" > <br>
+
+    Search Category: <select class="form-select" id="inputGroupSelect02" [(ngModel)]="filterproducts" > 
+        <option value="" selected> All product.. </option>
+        <option value="women's clothing"> Woman clothes </option>
+        <option value="men's clothing"> Men clothing </option>
+    </select>
+
+    @for(item of filterproduct ; track item.id){
+    <div class="col-sm-3 mb-4 mt-4">
+        <img src={{item.image}} class="img-fluid" > 
+        <h4>{{item.name}}</h4>
+        <h5>{{item.category}}</h5>
+        <h4 [style.color]="item.price < 200 ?'green': 'black'">{{item.price}}</h4>
+        <h3 [class.bg-warning]="item.quantity == 1"
+            [class.bg-white]="item.quantity >1"
+        >
+        <!-- {{item.quantity}} -->
+    @switch (item.quantity){
+        @case(1) {last one item} 
+        @case (0) {out of stock}
+        @case (2) {last two items}
+        @default {in stock : {{item.quantity}}}
+    }
+    </h3>
+        
+        <button class="btn btn-success" [disabled]="item.quantity == 0">
+            Add to Cart <i class="fa-solid fa-cart-shopping"></i>
+          </button><br><br>
+          <button class="btn btn-success ms-1" (click)="decreaseQuantity(item)" [disabled]="item.quantity == 0">Buy  <i class="fa-solid fa-bag-shopping"></i> </button>
+            </div>
+          
+
+}
+
+@empty{
+    <h2> No Products Founded </h2>
+}
+</div>
+
+<br><hr>
+<div>
+  
+    <h1>Store Name: {{store1.name}}</h1>
+    <h4>Branches: {{store1.branches}}</h4>
+    <!-- <img src="{{store1.logo}}" width="150" height="150"><br><br> -->
+    <img *ngIf="IsPurshased" src="{{store1.logo}}" width="150" height="150"><br>
+    <h3 *ngIf="!IsPurshased">Thanks for purchasing from our store, {{ClientName}}!</h3>
+    <button class="btn btn-success" (click)="toggleImage()">Buy <i class="fa-solid fa-bag-shopping"></i></button>
+    
+    <!-- <h3 > product data</h3>
+    <h5>product id: {{product1.id}}</h5>
+    <h5>product name: {{product1.name}}</h5>
+    <h5>product Quentity: {{product1.quantity}}</h5>
+    <h5>product price: {{product1.price}}</h5>
+    <h5>logo: <img src="{{product1.img}}" width="100" height="100"></h5>
+    <h5>product category: {{product1.categoryId}}</h5> -->
+</div>
+<div class="container">
+    @if(IsPurshased){
+    <img src="assets/image1.webp" width="200">
+    }
+    @if(Isdiv){
+        <div class="font-weight-bold text-white bg-dark">Thanks for purchasing from our Store {{ ClientName}} <i class="fa-solid fa-heart"></i></div>
+    }
+</div>
+<button class="btn btn-success" (click)="toggleImage()">Buy <i class="fa-solid fa-bag-shopping"></i></button>
+
